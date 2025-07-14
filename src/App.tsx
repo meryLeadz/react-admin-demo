@@ -1,12 +1,27 @@
-import { Admin, Resource, ListGuesser, ShowGuesser } from "react-admin";
+import { Admin, Resource, ListGuesser } from "react-admin";
 import { Layout } from "./Layout";
 import { dataProvider } from "./dataProvider";
-import PostList from "./posts/post-list";
+import PostList from "./pages/posts/post-list";
+import UserList from "./pages/users/user-list";
+import PostShow from "./pages/posts/post-show";
+import UserShow from "./pages/users/user-show";
+import PostEdit from "./pages/posts/post-edit";
+import PostCreate from "./pages/posts/post-create";
+import ArticleIcon from "@mui/icons-material/Article";
+import PersonIcon from "@mui/icons-material/Person";
+import { HomePage } from "./pages/homepage";
+import { authProvider } from "./authProvider";
 
 export const App = () => (
-    <Admin layout={Layout} dataProvider={dataProvider}>
-        <Resource name="posts" list={PostList} />
-        {/* <Resource name="users" list={ListGuesser}/> */}
+    <Admin layout={Layout} dataProvider={dataProvider} dashboard={HomePage} authProvider={authProvider}>
+        <Resource
+            icon={ArticleIcon}
+            name="posts"
+            list={PostList}
+            show={PostShow}
+            edit={PostEdit}
+            create={PostCreate} />
+        <Resource icon={PersonIcon} name="users" list={UserList} show={UserShow} />
     </Admin>
 );
 
